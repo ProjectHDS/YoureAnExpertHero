@@ -1,5 +1,11 @@
-You're an Expert, Harry!
+You're an Expert, ~~Harry~~ Hero!
 ========================
+
+I made this working again for Herodotus for no reason.
+
+More mod compatibility on the way, maybe.
+
+---
 By the Spirit of Quat
 
 Disclaimer: Quat1024 made this mod in its first iteration. (You can tell because this repo is a fork of his.) He has graciously given control and distribution of it to me (because he thinks it's a horrible idea ~and so do I tbh~).
@@ -63,6 +69,15 @@ With Botania Tweaks:
 * `basic_agglomeration`: 3 items -> 1 item with a random mana cost from 1/5 of terrasteel to the cost of terrasteel.
 * `advanced_agglomeration`: Basic agglomeration but it also creates a custom multiblock for the agglomeration plate that resets to the traditional agglomeration plate every time you craft.
 
+With Extended Crafting
+
+* `ender`: Ender Crafting.
+* `combination`: Well, combination crafting at its best (48 items).
+* `basic_table`: Basic 3x3 table crafting, 50/50 chance whether it's shaped.
+* `advanced_table`: Same as above but 5x5.
+* `elite_table`: Same as above but 7x7.
+* `ultimate_table`: You know the drill.
+
 More to come iff you're interested.
 
 ### License
@@ -72,4 +87,5 @@ Mozilla public license 2.0 or any later version
 ### Why?
 
 Quat: FTB Odyssey
-Me: idek
+Whizzball1: idek
+Me: Me neither
