@@ -36,8 +36,8 @@ import java.util.List;
 				clientSideOnly = true
 )
 public class YoureAnExpertHarry {
-	public static final String MODID = "youre_an_expert_harry";
-	public static final String NAME = "You're an Expert, Harry!";
+	public static final String MODID = "youreanexpertharry";
+	public static final String NAME = "You're an Expert, Hero!";
 	public static final String VERSION = "GRADLE:VERSION";
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 	
@@ -65,8 +65,6 @@ public class YoureAnExpertHarry {
 		HeckMethods.init();
 		
 		settingsFile = new File(e.getSuggestedConfigurationFile().getParent() + File.separator + MODID + ".json");
-
-
 	}
 	
 	@Mod.EventHandler

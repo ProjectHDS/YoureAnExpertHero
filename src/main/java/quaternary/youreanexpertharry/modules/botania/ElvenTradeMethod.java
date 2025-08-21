@@ -12,7 +12,6 @@ import quaternary.youreanexpertharry.heck.HeckData;
 import quaternary.youreanexpertharry.heck.Heckception;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.recipe.RecipeElvenTrade;
-import vazkii.botania.api.recipe.RecipeManaInfusion;
 import vazkii.botania.common.block.ModBlocks;
 
 import java.util.*;

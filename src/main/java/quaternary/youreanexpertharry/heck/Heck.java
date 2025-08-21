@@ -7,7 +7,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import org.apache.commons.lang3.tuple.Pair;
 import quaternary.youreanexpertharry.YoureAnExpertHarry;
 import quaternary.youreanexpertharry.heck.tasks.IHeckTask;
 import quaternary.youreanexpertharry.heck.tasks.RecipeTask;
