@@ -3,12 +3,15 @@ package quaternary.youreanexpertharry.heck;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
 import quaternary.youreanexpertharry.YoureAnExpertHarry;
+import quaternary.youreanexpertharry.etc.ShapelessStack;
 import quaternary.youreanexpertharry.heck.tasks.RecipeTask;
 import quaternary.youreanexpertharry.modules.AbstractModule;
 import quaternary.youreanexpertharry.settings.YAEHSettings;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 //Here should go a method that gets "required type of item" like if a machine block is required. Or something.
 public abstract class AbstractHeckMethod {
@@ -17,7 +20,8 @@ public abstract class AbstractHeckMethod {
 	}
 	
 	public final int inputCount;
-	
+	public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
+
 	public abstract Optional<String> getRequiredImports();
 	public abstract String removeExistingRecipe(ItemStack output);
 	public abstract String writeZenscript(String recipeName, ItemStack output, List<ItemStack> inputs);
@@ -69,5 +73,15 @@ public abstract class AbstractHeckMethod {
 	
 	public static String quote(String s) {
 		return '"' + s + '"';
+	}
+
+	protected static boolean shapelessSanityCheck(HashSet<ShapelessStack> shapelessSet) {
+		if (sanitySet.contains(shapelessSet)) return false;
+		return true;
+	}
+
+	protected static boolean singleSanityCheck(Heck.GoodItemStack sanityItem) {
+		if (sanitySet.contains(sanityItem)) return false;
+		return true;
 	}
 }

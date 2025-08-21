@@ -47,7 +47,7 @@ public class ElvenTradeMethod extends AbstractHeckMethod {
 
             YoureAnExpertHarry.LOGGER.info("Sanity-checking elven trade");
             YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
-            sanity = this.sanityCheck(shapelessSet);
+            sanity = shapelessSanityCheck(shapelessSet);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
         if (success) {
@@ -56,13 +56,8 @@ public class ElvenTradeMethod extends AbstractHeckMethod {
             b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
         }
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), success);
 
-    }
-
-    private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
     }
 
     @Override

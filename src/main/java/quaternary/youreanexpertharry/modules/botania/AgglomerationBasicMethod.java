@@ -44,20 +44,15 @@ public class AgglomerationBasicMethod extends AbstractHeckMethod {
 
             YoureAnExpertHarry.LOGGER.info("Sanity-checking basic agglomeration");
             YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
-            sanity = this.sanityCheck(shapelessSet);
+            sanity = shapelessSanityCheck(shapelessSet);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
         sanitySet.add(shapelessSet);
         if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
         String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), true);
 
-    }
-
-    private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package quaternary.youreanexpertharry;
 
+import com.blakebr0.extendedcrafting.Tags;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +20,7 @@ import quaternary.youreanexpertharry.heck.HeckTier;
 import quaternary.youreanexpertharry.modules.AbstractModule;
 import quaternary.youreanexpertharry.modules.botania.ModuleBotania;
 import quaternary.youreanexpertharry.modules.botania.ModuleBotaniaTweaks;
+import quaternary.youreanexpertharry.modules.extendedcrafting.ModuleExtendedCrafting;
 import quaternary.youreanexpertharry.settings.YAEHSettings;
 
 import java.io.File;
@@ -36,9 +38,9 @@ import java.util.List;
 				clientSideOnly = true
 )
 public class YoureAnExpertHarry {
-	public static final String MODID = "youreanexpertharry";
-	public static final String NAME = "You're an Expert, Hero!";
-	public static final String VERSION = "GRADLE:VERSION";
+	public static final String MODID = Tags.MODID;
+	public static final String NAME = Tags.MODNAME;
+	public static final String VERSION = Tags.VERSION;
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 	
 	public static YAEHSettings settings = null;
@@ -60,6 +62,9 @@ public class YoureAnExpertHarry {
 		}
 		if (Loader.isModLoaded("botania_tweaks") && Loader.isModLoaded("modtweaker")) {
 			modules.add(new ModuleBotaniaTweaks());
+		}
+		if (Loader.isModLoaded("extendedcrafting")) {
+			modules.add(new ModuleExtendedCrafting());
 		}
 
 		HeckMethods.init();

@@ -20,8 +20,6 @@ public class RunicAltarMethod extends AbstractHeckMethod {
 
     public RunicAltarMethod() {super(9);}
 
-    public static Set<HashSet<ShapelessStack>> sanitySet = new HashSet<>();
-
     public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
         int inputSize = Heck.random.nextInt(9) + 1;
         List<ItemStack> recipeStacks = new ArrayList<>(inputSize);
@@ -39,20 +37,15 @@ public class RunicAltarMethod extends AbstractHeckMethod {
 
             YoureAnExpertHarry.LOGGER.info("Sanity-checking runic altar");
             YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
-            sanity = this.sanityCheck(shapelessSet);
+            sanity = shapelessSanityCheck(shapelessSet);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
         sanitySet.add(shapelessSet);
         if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
         String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(true));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, b), true);
 
-    }
-
-    private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
     }
 
     @Override

@@ -43,7 +43,7 @@ public class SmeltingMethod extends AbstractHeckMethod {
 
 			//YoureAnExpertHarry.LOGGER.info("Sanity-checking smelting");
             //YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
-			sanity = this.sanityCheck(sanityItem);
+			sanity = singleSanityCheck(sanityItem);
 		}
 		//YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
 		if (success) {
@@ -52,13 +52,8 @@ public class SmeltingMethod extends AbstractHeckMethod {
 			b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
 		}
 
-		return new MutablePair<>(new MutablePair<>(recipeStacks, b), new Boolean(success));
+		return new MutablePair<>(new MutablePair<>(recipeStacks, b), success);
 
-	}
-
-	private boolean sanityCheck(Heck.GoodItemStack sanityItem) {
-		if (sanitySet.contains(sanityItem)) return false;
-		return true;
 	}
 
 	@Override

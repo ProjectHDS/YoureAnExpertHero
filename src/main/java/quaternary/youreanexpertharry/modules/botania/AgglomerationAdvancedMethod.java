@@ -75,7 +75,7 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
 
             YoureAnExpertHarry.LOGGER.info("Sanity-checking advanced agglomeration;");
             YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
-            sanity = this.sanityCheck(shapelessSet);
+            sanity = shapelessSanityCheck(shapelessSet);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
 
@@ -86,13 +86,8 @@ public class AgglomerationAdvancedMethod extends AbstractHeckMethod {
         }
 
 
-        return new MutablePair<>(new MutablePair<>(recipeStacks, s), new Boolean(success));
+        return new MutablePair<>(new MutablePair<>(recipeStacks, s), success);
 
-    }
-
-    private boolean sanityCheck(HashSet<ShapelessStack> shapelessSet) {
-        if (sanitySet.contains(shapelessSet)) return false;
-        return true;
     }
 
     @Override

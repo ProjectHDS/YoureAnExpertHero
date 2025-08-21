@@ -1,5 +1,6 @@
-package quaternary.youreanexpertharry.modules.botania;
+package quaternary.youreanexpertharry.modules.extendedcrafting;
 
+import com.blakebr0.extendedcrafting.block.ModBlocks;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.MutablePair;
@@ -10,23 +11,50 @@ import quaternary.youreanexpertharry.heck.AbstractHeckMethod;
 import quaternary.youreanexpertharry.heck.Heck;
 import quaternary.youreanexpertharry.heck.HeckData;
 import quaternary.youreanexpertharry.heck.Heckception;
-import vazkii.botania.api.BotaniaAPI;
-import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.common.block.ModBlocks;
 
 import java.util.*;
 
-public class PetalApothecaryMethod extends AbstractHeckMethod {
-
-    public PetalApothecaryMethod() {
-        super(9);
+public class CompressorMethod extends AbstractHeckMethod {
+    public CompressorMethod() {
+        super(2);
     }
 
+    @Override
+    public Optional<String> getRequiredImports() {
+        return Optional.of("import mods.extendedcrafting.CompressionCrafting;");
+    }
+
+    @Override
+    public String removeExistingRecipe(ItemStack output) {
+        return String.format(
+                "CompressionCrafting.remove(%s);\n",
+                stackToBracket(output)
+        );
+    }
+
+    @Override
+    public String writeZenscript(String recipeName, ItemStack output, List<ItemStack> inputs) {
+        Random random = new Random();
+        // addRecipe(<output>, <input>, inputCount, <catalyst>, rfCost);
+        return String.format("CompressionCrafting.addRecipe(%s, %s %s, %s, %s);",
+                stackToBracket(output),
+                stackToBracket(inputs.get(0)),
+                random.nextInt(114514),
+                stackToBracket(inputs.get(1)),
+                random.nextInt(114514)
+        );
+    }
+
+    @Override
+    public List<ItemStack> getRequiredItems() {
+        return ImmutableList.of(new ItemStack(ModBlocks.blockCompressor, 1, 0));
+    }
+
+    @Override
     public Pair<Pair<List<ItemStack>, String>, Boolean> chooseInputs(HeckData allHeck, Heck.GoodItemStack outputGood, boolean base) throws Heckception {
-        int inputSize = Heck.random.nextInt(9) + 1;
+        int inputSize = Heck.random.nextInt(2) + 1;
         List<ItemStack> recipeStacks = new ArrayList<>(inputSize);
         HashSet<ShapelessStack> shapelessSet = new HashSet<>();
-
         boolean sanity = false;
 
         while (!(sanity)) {
@@ -37,47 +65,15 @@ public class PetalApothecaryMethod extends AbstractHeckMethod {
             }
             recipeStacks.forEach(is -> ShapelessStack.shapelessAdd(shapelessSet, is));
 
-            YoureAnExpertHarry.LOGGER.info("Sanity-checking petal apothecary");
+            YoureAnExpertHarry.LOGGER.info("Sanity-checking Compressor recipes.");
             YoureAnExpertHarry.LOGGER.info(recipeStacks.toString());
             sanity = shapelessSanityCheck(shapelessSet);
         }
         YoureAnExpertHarry.LOGGER.info("Sanity succeeded");
         sanitySet.add(shapelessSet);
         if (allHeck.currentLevel != 0) addItemsToTask(recipeStacks, allHeck, Heck.settings);
-        String b = writeZenscript("youre_an_expert_harry_" + allHeck.recipeCount, outputGood.actualStack, recipeStacks);
+        String b = writeZenscript("", outputGood.actualStack, recipeStacks);
 
         return new MutablePair<>(new MutablePair<>(recipeStacks, b), true);
     }
-
-    @Override
-    public String removeExistingRecipe(ItemStack output) {
-        for (RecipePetals r : BotaniaAPI.petalRecipes) {
-            if (r.getOutput() != null && (new Heck.GoodItemStack(r.getOutput())).equals(new Heck.GoodItemStack(output))) {
-                return String.format(
-                        "Apothecary.removeRecipe(%s);\n",
-                        stackToBracket(output)
-                );
-            }
-        }
-        return ("");
-    }
-
-    public String writeZenscript(String recipeName, ItemStack output, List<ItemStack> inputs) {
-        return String.format(
-                "Apothecary.addRecipe(%s, %s);",
-                stackToBracket(output),
-                stacksToBracketedList(inputs)
-        );
-    }
-
-    @Override
-    public Optional<String> getRequiredImports() {
-        return Optional.of("import mods.botania.Apothecary;");
-    }
-
-    @Override
-    public List<ItemStack> getRequiredItems() {
-        return ImmutableList.of(new ItemStack(ModBlocks.altar, 1, 0));
-    }
-
 }
